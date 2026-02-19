@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: client-service
+  r2dbc:
+    url: r2dbc:tc:postgresql:///databasename?TC_IMAGE_TAG=16
