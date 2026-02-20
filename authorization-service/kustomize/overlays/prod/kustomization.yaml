@@ -10,10 +10,10 @@ patches:
       value: 3
   target:
     kind: Deployment
-    name: account-service
+    name: authorization-service
 images:
-- name: Customize Toolbar…
-  newName: agilesolutions/Customize Toolbar…
+- name: authorization-service
+  newName: agilesolutions/authorization-service
 labels:
 - includeSelectors: true
   pairs:
