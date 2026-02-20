@@ -1,6 +1,5 @@
 # legacy z/OS COBOL to Spring Boot microservices on Kubernetes
-This project is demonstrating Strangler Fig pattern for modernizing a legacy z/OS COBOL system (like your SVB system) 
-into Spring Boot microservices on Kubernetes, using a Java REST API gateway as the integration layer.
+This project is demonstrating Strangler Fig pattern for modernizing a legacy monolith z/OS COBOL system into Spring Boot microservices on Kubernetes, using a Java REST API gateway as the integration layer.
 
 The Strangler Fig pattern allows you to incrementally replace parts of the legacy system with new microservices, while keeping the old system running until the new one is fully functional.
 
