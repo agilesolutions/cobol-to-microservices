@@ -1,4 +1,4 @@
-debug: true
+debug: false
 
 server:
   port: 8090
@@ -21,6 +21,8 @@ management:
 spring:
   application:
     name: discovery-service
+  config:
+    import: "optional:configserver:http://localhost:8091/"
   security:
     oauth2:
       resourceserver:

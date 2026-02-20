@@ -4,8 +4,8 @@ spring:
   application:
     name: "configuration-service"
   profiles:
-    # active: native
-    active: git
+    active: native
+    # active: git
   cloud:
     config:
       server:
