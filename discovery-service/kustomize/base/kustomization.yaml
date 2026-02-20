@@ -7,5 +7,5 @@ resources:
 #  - ingress.yaml
 # default image (will be overridden by overlays/CI)
 images:
-  - name: account-service
+  - name: discovery-service
     newTag: 0.0.1

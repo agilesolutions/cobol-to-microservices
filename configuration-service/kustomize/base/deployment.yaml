@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: account-service
+  name: configuration-service
   namespace: services
   labels:
-    app: account-service
+    app: configuration-service
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: account-service
+      app: configuration-service
   template:
     metadata:
       labels:
-        app: account-service
+        app: configuration-service
     spec:
       containers:
-        - name: account-service
-          image: agilesolutions/account-service:1.0.1
+        - name: configuration-service
+          image: agilesolutions/configuration-service:1.0.1
           ports:
-            - containerPort: 8081
+            - containerPort: 8091

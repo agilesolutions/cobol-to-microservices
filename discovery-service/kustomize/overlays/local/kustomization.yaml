@@ -6,8 +6,8 @@ resources:
 patches:
   - path: ./service-patch.yaml
 images:
-  - name: account-service
-    newName: agilesolutions/account-service
+  - name: discovery-service
+    newName: agilesolutions/discovery-service
     newTag: 1.0.1
 labels:
 - includeSelectors: true

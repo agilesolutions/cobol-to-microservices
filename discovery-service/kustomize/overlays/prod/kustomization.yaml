@@ -10,10 +10,10 @@ patches:
       value: 3
   target:
     kind: Deployment
-    name: account-service
+    name: discovery-service
 images:
-- name: Customize Toolbar…
-  newName: agilesolutions/Customize Toolbar…
+- name: discovery-service
+  newName: agilesolutions/discovery-service
 labels:
 - includeSelectors: true
   pairs:
