@@ -11,13 +11,13 @@ public class LegacyCustomerService {
     private final WebClient webClient;
 
     public LegacyCustomerService(WebClient.Builder webClientBuilder) {
-        this.webClient = webClientBuilder.baseUrl("http://zosconnect-host:9080/zos").build();
+        this.webClient = webClientBuilder.baseUrl("http://gateway-service").build();
     }
 
     public Mono<CustomerResponse> getCustomer(String id) {
         // Call z/OS Connect REST endpoint
         return webClient.get()
-                .uri("/customers/{id}", id)
+                .uri("/legacy/customers/{id}", id)
                 .retrieve()
                 .bodyToMono(CustomerResponse.class); // JSON mapped to Java class
     }

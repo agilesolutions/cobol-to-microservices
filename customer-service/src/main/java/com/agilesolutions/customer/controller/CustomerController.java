@@ -25,7 +25,7 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api")
 public class CustomerController {
 
-    private final LegacyCustomerService legacyAccountService;
+    private final LegacyCustomerService legacyCustomerService;
 
     @Operation(
             summary = "Fetch all customers",
@@ -46,7 +46,7 @@ public class CustomerController {
     }
     )
     @GetMapping("/customers/{id}")
-    public Mono<CustomerResponse> getLegacyAccount(@PathVariable String id) {
-        return legacyAccountService.getCustomer(id);
+    public Mono<CustomerResponse> getLegacyCustomer(@PathVariable String id) {
+        return legacyCustomerService.getCustomer(id);
     }
 }
