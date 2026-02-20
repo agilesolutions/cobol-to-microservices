@@ -7,5 +7,5 @@ resources:
 #  - ingress.yaml
 # default image (will be overridden by overlays/CI)
 images:
-  - name: gateway
+  - name: zos-connect-service
     newTag: 1.0.1

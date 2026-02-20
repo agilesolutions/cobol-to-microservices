@@ -1,5 +1,5 @@
 server:
-  port: 8090
+  port: 8083
 
 
 management:
@@ -18,19 +18,18 @@ management:
 
 spring:
   application:
-    name: account-service
-  security:
-    oauth2:
-      client:
-        registration:
-          my-client:
-            provider: my-provider
-            authorization-grant-type: client_credentials
-            client-id: my-client-id
-            client-secret: my-client-secret
-        provider:
-          my-provider:
-            token-uri: http://localhost:8082/oauth2/token
+    name: zos-connect-service
+  config:
+    import: "optional:configserver:http://localhost:8091/"
+
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    fetchRegistry: true
+    registerWithEureka: true
+    serviceUrl:
+      defaultZone: http://localhost:8090/eureka/
 
 springdoc:
   #  enable-spring-security: true

@@ -19,6 +19,14 @@ management:
 spring:
   application:
     name: gateway
+  config:
+    import: "optional:configserver:http://localhost:8091/"
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
   security:
     oauth2:
       client:
@@ -31,6 +39,15 @@ spring:
         provider:
           my-provider:
             token-uri: http://localhost:8082/oauth2/token
+
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    fetchRegistry: true
+    registerWithEureka: true
+    serviceUrl:
+      defaultZone: http://localhost:8090/eureka/
 
 springdoc:
   #  enable-spring-security: true

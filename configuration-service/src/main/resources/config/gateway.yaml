@@ -1,0 +1,54 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: gateway-service
+
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+
+      routes:
+
+        # =========================
+        # Legacy (z/OS Connect)
+        # =========================
+        - id: legacy-account-route
+          uri: lb://zos-connect-service
+          predicates:
+            - Path=/legacy/accounts/**
+
+        - id: legacy-customer-route
+          uri: lb://zos-connect-service
+          predicates:
+            - Path=/legacy/customers/**
+
+        # =========================
+        # New Microservices
+        # =========================
+        - id: account-service-route
+          uri: lb://account-service
+          predicates:
+            - Path=/api/accounts/**
+
+        - id: customer-service-route
+          uri: lb://customer-service
+          predicates:
+            - Path=/api/customers/**
+
+        # =========================
+        # Strangler Fig - Dual Run
+        # =========================
+        - id: strangler-account-route
+          uri: lb://account-service
+          predicates:
+            - Path=/strangler/accounts/**
+          filters:
+            - name: RequestHeaderToRequestUri
+              args:
+                name: X-Legacy-Url
+                value: http://mock-zosconnect/zos/accounts

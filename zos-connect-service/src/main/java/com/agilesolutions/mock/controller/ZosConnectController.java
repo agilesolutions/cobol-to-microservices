@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.ErrorResponse;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @Tag(
@@ -17,7 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
         description = "CRUD REST APIs for managing accounts"
 )
 @RestController
-public class AccountController {
+@RequestMapping("/legacy")
+public class ZosConnectController {
 
     @Operation(
             summary = "Fetch all accounts",
@@ -37,7 +39,7 @@ public class AccountController {
             )
     }
     )
-    @GetMapping("/zos/accounts/{id}")
+    @GetMapping("/accounts/{id}")
     public AccountResponse getAccount(@PathVariable String id) {
         // Simulated COBOL copybook translation to JSON
         AccountResponse account = new AccountResponse(id, "Checking", 1234.56);

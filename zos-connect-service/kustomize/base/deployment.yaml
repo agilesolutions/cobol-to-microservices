@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gateway
+  name: zos-connect-service
   namespace: services
   labels:
-    app: gateway
+    app: zos-connect-service
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: gateway
+      app: zos-connect-service
   template:
     metadata:
       labels:
-        app: gateway
+        app: zos-connect-service
     spec:
       containers:
-        - name: gateway
-          image: agilesolutions/gateway:1.0.1
+        - name: zos-connect-service
+          image: agilesolutions/zos-connect-service:1.0.1
           ports:
             - containerPort: 8082

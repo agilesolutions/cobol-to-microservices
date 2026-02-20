@@ -6,8 +6,8 @@ resources:
 patches:
   - path: ./service-patch.yaml
 images:
-  - name: gateway
-    newName: agilesolutions/gateway
+  - name: zos-connect-service
+    newName: agilesolutions/zos-connect-service
     newTag: 1.0.1
 labels:
 - includeSelectors: true
