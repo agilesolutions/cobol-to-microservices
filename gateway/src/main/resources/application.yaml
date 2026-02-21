@@ -31,13 +31,13 @@ spring:
     oauth2:
       client:
         registration:
-          my-client:
+          gateway:
             provider: gateway-provider
             authorization-grant-type: client_credentials
             client-id: gateway-client-id
             client-secret: gateway-client-secret
         provider:
-          my-provider:
+          local-provider:
             token-uri: http://authorization-service/oauth2/token
 
 eureka:

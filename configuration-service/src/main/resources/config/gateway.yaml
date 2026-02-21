@@ -21,6 +21,11 @@ spring:
           uri: lb://zos-connect-service
           predicates:
             - Path=/legacy/accounts/**
+          filters:
+            # Relays the access token to the downstream service
+            - TokenRelay=gateway-client-id
+            # Recommended: Remove the session cookie so downstream services only see the Bearer token
+            - RemoveRequestHeader=Cookie
 
         - id: legacy-customer-route
           uri: lb://zos-connect-service
@@ -39,11 +44,21 @@ spring:
           uri: lb://account-service
           predicates:
             - Path=/api/accounts/**
+          filters:
+            # Relays the access token to the downstream service
+            - TokenRelay=gateway-client-id
+            # Recommended: Remove the session cookie so downstream services only see the Bearer token
+            - RemoveRequestHeader=Cookie
 
         - id: customer-service-route
           uri: lb://customer-service
           predicates:
             - Path=/api/customers/**
+          filters:
+            # Relays the access token to the downstream service
+            - TokenRelay=gateway-client-id
+            # Recommended: Remove the session cookie so downstream services only see the Bearer token
+            - RemoveRequestHeader=Cookie
 
         # =========================
         # Strangler Fig - Dual Run

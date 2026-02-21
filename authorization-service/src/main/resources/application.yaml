@@ -19,15 +19,12 @@ management:
 spring:
   application:
     name: authoriziation-service
-  security:
-    oauth2:
-      client:
-        registration:
-          my-client:
-            provider: my-provider
-            authorization-grant-type: client_credentials
-            client-id: my-client-id
-            client-secret: my-client-secret
-        provider:
-          my-provider:
-            token-uri: http://localhost:8092/oauth2/token
+
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    fetchRegistry: true
+    registerWithEureka: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
