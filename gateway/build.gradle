@@ -44,7 +44,6 @@ dependencyManagement {
 
 
 dependencies {
-    //implementation 'org.springframework.boot:spring-boot-starter-webflux'
     implementation 'org.springframework.cloud:spring-cloud-starter-gateway'
     implementation 'org.springframework.cloud:spring-cloud-starter-config'
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
@@ -53,9 +52,16 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.34'
 
     // set up gateway as an OAuth2 client to extract the OAuth2 access token from the currently
-    // authenticated user and adds it as a Bearer token to the downstream request on downstream service calls. This allows the downstream services to validate the token and extract user authorities for authorization decisions.
-    //implementation 'org.springframework.boot:spring-boot-starter-security'
+    // authenticated user and adds it as a Bearer token to the downstream request on downstream service calls.
+    // This allows the downstream services to validate the token and extract user authorities for authorization decisions.
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+    //implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+
+    // swagger ui for testing
+    implementation("org.springdoc:springdoc-openapi-starter-webflux-ui:2.8.9")
+    implementation("org.springdoc:springdoc-openapi-starter-webflux-api:2.8.9")
+
 
     // tests
     testImplementation 'org.springframework.boot:spring-boot-starter-test'

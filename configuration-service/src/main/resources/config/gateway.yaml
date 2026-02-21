@@ -22,8 +22,8 @@ spring:
           predicates:
             - Path=/legacy/accounts/**
           filters:
-            # Relays the access token to the downstream service
-            - TokenRelay=gateway-client-id
+            # The gateway only validates the JWT and forwards it as a Bearer token to downstream services
+            - AddRequestHeader=Authorization,#{request.headers['Authorization']}
             # Recommended: Remove the session cookie so downstream services only see the Bearer token
             - RemoveRequestHeader=Cookie
 
@@ -32,8 +32,8 @@ spring:
           predicates:
             - Path=/legacy/customers/**
           filters:
-            # Relays the access token to the downstream service
-            - TokenRelay=gateway-client-id
+            # The gateway only validates the JWT and forwards it as a Bearer token to downstream services
+            - AddRequestHeader=Authorization,#{request.headers['Authorization']}
             # Recommended: Remove the session cookie so downstream services only see the Bearer token
             - RemoveRequestHeader=Cookie
 

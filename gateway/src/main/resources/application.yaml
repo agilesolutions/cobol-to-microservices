@@ -32,7 +32,7 @@ spring:
       client:
         registration:
           gateway:
-            provider: gateway-provider
+            provider: local-provider
             authorization-grant-type: client_credentials
             client-id: gateway-client-id
             client-secret: gateway-client-secret
