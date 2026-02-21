@@ -54,6 +54,10 @@ dependencies {
     implementation("org.springdoc:springdoc-openapi-starter-webflux-ui:2.8.9")
     implementation("org.springdoc:springdoc-openapi-starter-webflux-api:2.8.9")
 
+    // Each downstream service must be configured as an OAuth2 Resource Server.
+    // This allows them to accept the Bearer token relayed by the gateway, validate its signature, and extract user authorities
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+
     // tests
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.projectlombok:lombok:1.18.34'

@@ -26,6 +26,11 @@ spring:
           uri: lb://zos-connect-service
           predicates:
             - Path=/legacy/customers/**
+          filters:
+            # Relays the access token to the downstream service
+            - TokenRelay=gateway-client-id
+            # Recommended: Remove the session cookie so downstream services only see the Bearer token
+            - RemoveRequestHeader=Cookie
 
         # =========================
         # New Microservices

@@ -27,7 +27,7 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:8082/oauth2/token
+          issuer-uri: http://authorization-service/oauth2/token
 
 eureka:
   instance:

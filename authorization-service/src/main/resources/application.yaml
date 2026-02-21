@@ -17,6 +17,8 @@ management:
         enabled: true
 
 spring:
+  application:
+    name: authoriziation-service
   security:
     oauth2:
       client:
