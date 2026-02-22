@@ -50,7 +50,7 @@ spring:
         - id: account-service-route
           uri: lb://account-service
           predicates:
-            - Path=/api/accounts/**
+            - Path=/api/accounts/**, /api/depositAccounts/**
           filters:
             # Relays the access token to the downstream service, omit the clientRegistrationId to forward the OAuth2 access token of the currently authenticated user
             # Recommended: Remove the session cookie so downstream services only see the Bearer token

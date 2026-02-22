@@ -9,11 +9,9 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
 import org.springframework.web.ErrorResponse;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
 @Tag(
@@ -22,7 +20,7 @@ import reactor.core.publisher.Mono;
 )
 @Slf4j
 @RestController
-@RequestMapping("/api")
+@RequestMapping(path = "/api/accounts", produces = {MediaType.APPLICATION_JSON_VALUE})
 public class AccountController {
 
     private final LegacyAccountService legacyAccountService;
@@ -49,8 +47,8 @@ public class AccountController {
             )
     }
     )
-    @GetMapping("/accounts/{id}")
-    public Mono<AccountResponse> getLegacyAccount(@PathVariable String id) {
+    @GetMapping("/fetch")
+    public Mono<AccountResponse> getLegacyAccount(@RequestParam String id) {
         log.info("Received request to fetch account with id: {}", id);
         return legacyAccountService.getAccount(id);
     }

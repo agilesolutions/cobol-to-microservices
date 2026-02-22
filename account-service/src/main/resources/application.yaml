@@ -23,25 +23,25 @@ spring:
     name: account-service
   config:
     import: "optional:configserver:http://localhost:8091/"
+  jpa:
+    defer-datasource-initialization: true
+    database-platform: org.hibernate.dialect.H2Dialect
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create-drop
+  datasource:
+    url: r2dbc:h2:mem:///test?options=DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password: password
+    # driverClassName: org.h2.Driver
+  h2:
+    console:
+      enabled: true
   security:
     oauth2:
-      client:
-        registration:
-          gateway:
-            provider: local-provider
-            authorization-grant-type: client_credentials
-            client-id: gateway-client-id
-            client-secret: gateway-client-secret
-        provider:
-          local-provider:
-            token-uri: http://authorization-service/oauth2/token
-
       resourceserver:
         jwt:
           issuer-uri: http://localhost:8092
-#          issuer-uri: http://localhost:8092/oauth2/token
-#          issuer-uri: http://authorization-service
-
 
 eureka:
   instance:
