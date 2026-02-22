@@ -57,6 +57,7 @@ dependencies {
     // Each downstream service must be configured as an OAuth2 Resource Server.
     // This allows them to accept the Bearer token relayed by the gateway, validate its signature, and extract user authorities
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+    // implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 
     // tests
     testImplementation 'org.springframework.boot:spring-boot-starter-test'

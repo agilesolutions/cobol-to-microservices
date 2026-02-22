@@ -1,6 +1,7 @@
 server:
   port: 8080
 
+DEBUG: false
 
 management:
   endpoint:
@@ -29,16 +30,20 @@ spring:
           lower-case-service-id: true
   security:
     oauth2:
-      client:
-        registration:
-          gateway:
-            provider: local-provider
-            authorization-grant-type: client_credentials
-            client-id: gateway-client-id
-            client-secret: gateway-client-secret
-        provider:
-          local-provider:
-            token-uri: http://authorization-service/oauth2/token
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8092
+#    oauth2:
+#      client:
+#        registration:
+#          gateway:
+#            provider: local-provider
+#            authorization-grant-type: client_credentials
+#            client-id: gateway-client-id
+#            client-secret: gateway-client-secret
+#        provider:
+#          local-provider:
+#            token-uri: http://authorization-service/oauth2/token
 
 eureka:
   instance:

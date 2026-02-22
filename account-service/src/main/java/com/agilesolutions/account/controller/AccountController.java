@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.ErrorResponse;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +20,7 @@ import reactor.core.publisher.Mono;
         name = "CRUD REST APIs to CREATE, READ, UPDATE, DELETE accounts",
         description = "CRUD REST APIs for managing accounts"
 )
+@Slf4j
 @RestController
 @RequestMapping("/api")
 public class AccountController {
@@ -49,6 +51,8 @@ public class AccountController {
     )
     @GetMapping("/accounts/{id}")
     public Mono<AccountResponse> getLegacyAccount(@PathVariable String id) {
+        log.info("Received request to fetch account with id: {}", id);
         return legacyAccountService.getAccount(id);
     }
+
 }

@@ -1,4 +1,4 @@
-debug: true
+debug: false
 
 server:
   port: 8082
@@ -25,9 +25,23 @@ spring:
     import: "optional:configserver:http://localhost:8091/"
   security:
     oauth2:
+      client:
+        registration:
+          gateway:
+            provider: local-provider
+            authorization-grant-type: client_credentials
+            client-id: gateway-client-id
+            client-secret: gateway-client-secret
+        provider:
+          local-provider:
+            token-uri: http://authorization-service/oauth2/token
+
       resourceserver:
         jwt:
-          issuer-uri: http://authorization-service/oauth2/token
+          issuer-uri: http://localhost:8092
+#          issuer-uri: http://localhost:8092/oauth2/token
+#          issuer-uri: http://authorization-service
+
 
 eureka:
   instance:

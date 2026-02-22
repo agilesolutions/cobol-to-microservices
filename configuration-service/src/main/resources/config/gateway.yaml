@@ -23,7 +23,7 @@ spring:
             - Path=/legacy/accounts/**
           filters:
             # The gateway only validates the JWT and forwards it as a Bearer token to downstream services
-            - AddRequestHeader=Authorization,#{request.headers['Authorization']}
+            # - AddRequestHeader=Authorization,#{request.headers['Authorization']}
             # Recommended: Remove the session cookie so downstream services only see the Bearer token
             - RemoveRequestHeader=Cookie
 
@@ -33,7 +33,7 @@ spring:
             - Path=/legacy/customers/**
           filters:
             # The gateway only validates the JWT and forwards it as a Bearer token to downstream services
-            - AddRequestHeader=Authorization,#{request.headers['Authorization']}
+            # - AddRequestHeader=Authorization,#{request.headers['Authorization']}
             # Recommended: Remove the session cookie so downstream services only see the Bearer token
             - RemoveRequestHeader=Cookie
 
@@ -45,8 +45,7 @@ spring:
           predicates:
             - Path=/api/accounts/**
           filters:
-            # Relays the access token to the downstream service
-            - TokenRelay=gateway-client-id
+            # Relays the access token to the downstream service, omit the clientRegistrationId to forward the OAuth2 access token of the currently authenticated user
             # Recommended: Remove the session cookie so downstream services only see the Bearer token
             - RemoveRequestHeader=Cookie
 
@@ -55,8 +54,7 @@ spring:
           predicates:
             - Path=/api/customers/**
           filters:
-            # Relays the access token to the downstream service
-            - TokenRelay=gateway-client-id
+            # Relays the access token to the downstream service, omit the clientRegistrationId to forward the OAuth2 access token of the currently authenticated user
             # Recommended: Remove the session cookie so downstream services only see the Bearer token
             - RemoveRequestHeader=Cookie
 
