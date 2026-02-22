@@ -38,6 +38,13 @@ spring:
             - RemoveRequestHeader=Cookie
 
         # =========================
+        # propagate the authorization service name by using the Spring Cloud Gateway as a middleman
+        # =========================
+        - id: auth-service-route
+          uri: lb://authorization-service
+          predicates:
+            - Path=/.well-known/openid-configuration, /protocol/openid-connect/**
+        # =========================
         # New Microservices
         # =========================
         - id: account-service-route
