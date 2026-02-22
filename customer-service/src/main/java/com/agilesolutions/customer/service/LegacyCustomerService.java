@@ -17,7 +17,7 @@ public class LegacyCustomerService {
     }
 
     public Mono<CustomerResponse> getCustomer(String id) {
-        // Call z/OS Connect REST endpoint
+        // Call z/OS Connect REST endpoint and forward the JWT token for authentication
         return ReactiveSecurityContextHolder.getContext()
                 .map(ctx -> ctx.getAuthentication())
                 .cast(JwtAuthenticationToken.class)
