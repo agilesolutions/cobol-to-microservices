@@ -19,6 +19,7 @@ The Strangler Fig pattern allows you to incrementally replace parts of the legac
 12. **Collaboration and Communication**: Foster collaboration and communication between the teams working on the legacy system and the new microservices. This will help ensure a smooth transition and allow for knowledge sharing between teams.
 13. **Change Management**: Implement a change management process to handle the transition from the legacy system to the new microservices. This includes managing changes to the codebase, coordinating deployments, and communicating changes to stakeholders.
 14. **Performance Optimization**: As you develop new microservices, continuously monitor and optimize their
+15. **FluxCD**: Use FluxCD to automate the deployment of your microservices to Kubernetes. This will allow you to manage your deployments using GitOps principles, ensuring that your infrastructure and application changes are version-controlled and auditable. [Read FluxCD installation and deployment instructions here](./docus/fluxcd.md).
 
 ## Architecture Diagram
 ```
