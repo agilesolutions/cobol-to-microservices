@@ -1,6 +1,7 @@
 # FluxCD - GitOps for Kubernetes
-This repository contains a sample application and configuration for GitOps using FluxCD. The application is a MicroServices developed in Java with Spring Boot, and the configuration is set up to deploy the application to a Docker for Windows Kubernetes cluster using FluxCD.
 [<img src="./back.png">](../README.md)
+
+This repository contains a sample application and configuration for GitOps using FluxCD. The application is a MicroServices developed in Java with Spring Boot, and the configuration is set up to deploy the application to a Docker for Windows Kubernetes cluster using FluxCD.
 ## FluxCD in short
 FluxCD is a GitOps tool that automates the deployment of applications to Kubernetes clusters. It continuously monitors a Git repository for changes and applies those changes to the cluster, ensuring that the desired state defined in the Git repository is always reflected in the cluster. This approach allows for version control, collaboration, and easy rollback of changes, making it an ideal solution for managing Kubernetes deployments in a GitOps workflow.    
 Operating as a "pull-based" agent inside the cluster, it automates deployment by watching for repository changes, making it highly secure, auditable, and reliable for managing infrastructure and application updates.
