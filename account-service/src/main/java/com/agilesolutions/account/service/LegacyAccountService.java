@@ -19,7 +19,7 @@ public class LegacyAccountService {
     public Mono<AccountResponse> getAccount(String accountId) {
         // Call z/OS Connect REST endpoint end forward the JWT token for authentication
 
-        return ReactiveSecurityContextHolder.getContext()
+        Mono<AccountResponse> response = ReactiveSecurityContextHolder.getContext()
                 .map(ctx -> ctx.getAuthentication())
                 .cast(JwtAuthenticationToken.class)
                 .flatMap(jwtAuth -> {
@@ -31,6 +31,8 @@ public class LegacyAccountService {
                             .retrieve()
                             .bodyToMono(AccountResponse.class);
                 });
+
+        return response;
 
     }
 }
