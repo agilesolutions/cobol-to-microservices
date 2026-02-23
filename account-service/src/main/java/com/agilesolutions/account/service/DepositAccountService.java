@@ -37,7 +37,7 @@ public class DepositAccountService {
     public Mono<DepositAccount> save(DepositAccount depositAccount) {
         return depositAccountRepository.save(DepositAccountEntity.builder()
                         .accountNumber(depositAccount.accountNumber())
-                        .accountType(depositAccount.accountNumber())
+                        .accountType(depositAccount.accountType())
                         .balance(depositAccount.balance())
                         .build())
                 .map(savedDepositAccount -> DepositAccount.builder()
