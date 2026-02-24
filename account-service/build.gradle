@@ -69,6 +69,7 @@ dependencies {
 
     // tests
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
     testImplementation 'com.github.tomakehurst:wiremock-jre8-standalone:2.35.2'
     testImplementation 'io.projectreactor:reactor-test'
     testImplementation 'org.projectlombok:lombok:1.18.34'
