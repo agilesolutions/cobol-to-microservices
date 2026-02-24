@@ -1,6 +1,7 @@
 package com.agilesolutions.customer.controller;
 
 import com.agilesolutions.customer.model.CustomerResponse;
+import com.agilesolutions.customer.service.CustomerService;
 import com.agilesolutions.customer.service.LegacyCustomerService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -9,11 +10,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.ErrorResponse;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Tag(
@@ -22,10 +22,13 @@ import reactor.core.publisher.Mono;
 )
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api")
+@RequestMapping("/api/customers")
+@Slf4j
 public class CustomerController {
 
     private final LegacyCustomerService legacyCustomerService;
+
+    private final CustomerService customerService;
 
     @Operation(
             summary = "Fetch all customers",
@@ -45,8 +48,33 @@ public class CustomerController {
             )
     }
     )
-    @GetMapping("/customers/{id}")
-    public Mono<CustomerResponse> getLegacyCustomer(@PathVariable String id) {
+    @GetMapping("/fetch")
+    public Mono<CustomerResponse> getLegacyCustomer(@RequestParam String id) {
         return legacyCustomerService.getCustomer(id);
+    }
+
+    @Operation
+            (
+                    summary = "Fetch all customers",
+                    description = "Fetch all customers in the system"
+            )
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "HTTP Status OK"
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "HTTP Status Internal Server Error",
+                    content = @Content(
+                            schema = @Schema(implementation = ErrorResponse.class)
+                    )
+            )
+    }
+    )
+    @GetMapping("/fetchAll")
+    public Flux<CustomerResponse> getAllDepositAccounts(@RequestParam String number) {
+        log.info("Received request to fetch all accounts");
+        return customerService.findCustomerByNumber(number);
     }
 }
