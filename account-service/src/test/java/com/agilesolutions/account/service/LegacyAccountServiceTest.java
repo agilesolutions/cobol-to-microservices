@@ -5,7 +5,6 @@ import com.github.tomakehurst.wiremock.WireMockServer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.MockitoAnnotations;
 import org.springframework.security.test.context.support.ReactorContextTestExecutionListener;
 import org.springframework.security.test.context.support.WithSecurityContextTestExecutionListener;
 import org.springframework.test.context.TestExecutionListeners;
@@ -29,7 +28,6 @@ class LegacyAccountServiceTest {
 
     @BeforeEach
     void setup() {
-        MockitoAnnotations.openMocks(this);
         wireMockServer = new WireMockServer(8080);
         wireMockServer.start();
         accountService = new LegacyAccountService(WebClient.builder().baseUrl("http://localhost:" + wireMockServer.port()).build());
