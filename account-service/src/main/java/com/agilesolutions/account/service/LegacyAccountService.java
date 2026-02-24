@@ -2,7 +2,6 @@ package com.agilesolutions.account.service;
 
 import com.agilesolutions.account.model.AccountResponse;
 import lombok.RequiredArgsConstructor;
-import lombok.val;
 import org.springframework.security.core.context.ReactiveSecurityContextHolder;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
@@ -17,20 +16,8 @@ public class LegacyAccountService {
     private final WebClient webClient;
 
     public Mono<AccountResponse> getAccount(String accountId) {
-        Mono<SecurityContext> context = ReactiveSecurityContextHolder.getContext();
-
-//        SecurityContext mycontext = context.block();
-
         // Call z/OS Connect REST endpoint end forward the JWT token for authentication
-        Mono<AccountResponse> response = context
-                .doOnNext(ctx -> {
-
-                    System.out.println("SecurityContext: " + ctx.getAuthentication().getName());
-
-
-                    System.out.println("SecurityContext: " + ctx);
-
-                })
+        Mono<AccountResponse> response = ReactiveSecurityContextHolder.getContext()
                 .map(ctx -> ctx.getAuthentication())
                 .cast(JwtAuthenticationToken.class)
                 .flatMap(jwtAuth -> {
