@@ -15,7 +15,7 @@ public class CustomerService {
 
     private final CustomerRepository customerRepository;
 
-    public Flux<CustomerResponse> findAllCustomer(List<Long> clientIds) {
+    public Flux<CustomerResponse> findAllCustomer() {
         return Flux.fromStream(customerRepository.findAll().stream()
                 .map(this::mapToDomain));
     }

@@ -49,7 +49,7 @@ public class CustomerController {
     }
     )
     @GetMapping("/fetch")
-    public Mono<CustomerResponse> getLegacyCustomer(@RequestParam String id) {
+    public Mono<CustomerResponse> fetchLegacyCustomer(@RequestParam String id) {
         return legacyCustomerService.getCustomer(id);
     }
 
@@ -73,8 +73,8 @@ public class CustomerController {
     }
     )
     @GetMapping("/fetchAll")
-    public Flux<CustomerResponse> getAllDepositAccounts(@RequestParam String number) {
-        log.info("Received request to fetch all accounts");
-        return customerService.findCustomerByNumber(number);
+    public Flux<CustomerResponse> fetchAllCustomers() {
+        log.info("Received request to fetch all customers");
+        return customerService.findAllCustomer();
     }
 }
