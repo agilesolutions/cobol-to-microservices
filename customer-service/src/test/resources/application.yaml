@@ -1,5 +1,7 @@
 spring:
   application:
-    name: client-service
-  r2dbc:
-    url: r2dbc:tc:postgresql:///databasename?TC_IMAGE_TAG=16
+    name: customer-service
+  data:
+    mongodb:
+      database: test
+      port: 27017
