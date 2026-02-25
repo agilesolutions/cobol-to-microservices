@@ -1,6 +1,7 @@
 package com.agilesolutions.customer.service;
 
 import com.agilesolutions.customer.model.CustomerResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.ReactiveSecurityContextHolder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Service;
@@ -8,13 +9,10 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
 @Service
+@RequiredArgsConstructor
 public class LegacyCustomerService {
 
     private final WebClient webClient;
-
-    public LegacyCustomerService(WebClient.Builder webClientBuilder) {
-        this.webClient = webClientBuilder.baseUrl("http://gateway-service").build();
-    }
 
     public Mono<CustomerResponse> getCustomer(String id) {
         // Call z/OS Connect REST endpoint and forward the JWT token for authentication

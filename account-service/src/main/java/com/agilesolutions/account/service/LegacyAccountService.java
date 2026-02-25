@@ -3,7 +3,6 @@ package com.agilesolutions.account.service;
 import com.agilesolutions.account.model.AccountResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.ReactiveSecurityContextHolder;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;

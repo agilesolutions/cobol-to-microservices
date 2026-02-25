@@ -1,6 +1,6 @@
-package com.agilesolutions.account.service;
+package com.agilesolutions.customer.service;
 
-import com.agilesolutions.account.model.AccountResponse;
+import com.agilesolutions.customer.model.CustomerResponse;
 import com.github.tomakehurst.wiremock.WireMockServer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,54 +11,57 @@ import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
-import reactor.test.StepVerifier;
 
 @ExtendWith(SpringExtension.class)
 @TestExecutionListeners({
         WithSecurityContextTestExecutionListener.class,
         ReactorContextTestExecutionListener.class // Crucial for Reactive support
 })
-class LegacyAccountServiceTest {
+class LegacyCustomerServiceTest {
 
     private static WireMockServer wireMockServer;
 
     private WebClient webClient;
 
-    private LegacyAccountService accountService;
+    private LegacyCustomerService customerService;
 
     @BeforeEach
     void setup() {
         wireMockServer = new WireMockServer(8080);
         wireMockServer.start();
-        accountService = new LegacyAccountService(WebClient.builder().baseUrl("http://localhost:" + wireMockServer.port()).build());
+        customerService = new LegacyCustomerService(WebClient.builder().baseUrl("http://localhost:" + wireMockServer.port()).build());
     }
 
     @Test
     @WithMockJwt(subject = "admin-user", roles = {"ADMIN"})
-    void givenAccountId_whenGetAccount_thenReturnAccount() {
+    void givenCustomerId_whenGetCustomer_thenReturnCustomer() {
+
         // Given
-        Long accountId = 1L;
-        wireMockServer.stubFor(com.github.tomakehurst.wiremock.client.WireMock.get("/legacy/accounts/1")
+        Long customerId = 1L;
+        wireMockServer.stubFor(com.github.tomakehurst.wiremock.client.WireMock.get("/legacy/customers/1")
                 .willReturn(com.github.tomakehurst.wiremock.client.WireMock.aResponse()
                         .withHeader("Content-Type", "application/json")
                         .withBody("""
                                 {
-                                    "accountNumber": "123456789",
-                                    "accountType": "SAVINGS",
-                                    "balance": 1000.0
+                                    "customerNumber": "CUST12345",
+                                    "customerType": "INDIVIDUAL",
+                                    "customerName": "John Doe"
                                 }
                                 """)));
 
         // When
-        Mono<AccountResponse> accountResponseMono = accountService.getAccount("1");
+        Mono<CustomerResponse> customerResponseMono = customerService.getCustomer("1");
 
         // Then
-        StepVerifier.create(accountResponseMono)
-                .expectNextMatches(accountResponse ->
-                        accountResponse.accountNumber().equals("123456789") &&
-                        accountResponse.accountType().equals("SAVINGS") &&
-                        accountResponse.balance() == 1000.0
+        reactor.test.StepVerifier.create(customerResponseMono)
+                .expectNextMatches(customerResponse ->
+                        customerResponse.customerNumber().equals("CUST12345") &&
+                        customerResponse.customerType().equals("INDIVIDUAL") &&
+                        customerResponse.customerName().equals("John Doe")
                 )
                 .verifyComplete();
+                                    
+                                    
+                                      
     }
 }

@@ -1,4 +1,4 @@
-package com.agilesolutions.init;
+package com.agilesolutions.customer.init;
 
 import com.agilesolutions.customer.entity.Customer;
 import com.agilesolutions.customer.repository.CustomerRepository;
