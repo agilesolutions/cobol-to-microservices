@@ -15,5 +15,5 @@ public interface DepositAccountRepository extends R2dbcRepository<DepositAccount
     @Override
     Flux<DepositAccountEntity> findAll();
 
-    void deleteByAccountNumber(String accountNumber);
+    Mono<DepositAccountEntity> deleteByAccountNumber(String accountNumber);
 }
